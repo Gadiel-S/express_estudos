@@ -38,7 +38,8 @@ app.get('/redirect', (request, response) => {
 
 app.route('/class')
 .get((request, response) => {
-  response.send('Retrieve class info');
+  // response.send('Retrieve class info');
+  throw new Error();
 })
 .post((request, response) => {
   response.send('Create class info');
@@ -95,6 +96,11 @@ app.put('/edit', (request, response) => {
 // DELETE
 app.delete('/delete', (request, response) => {
   response.send("This is a DELETE request at /delete");
+});
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Something is broken!");
 });
 
 // Lançamento servidor
